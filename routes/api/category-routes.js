@@ -19,10 +19,16 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
   // find one category by its `id` value
-  Category.findOne(req.params.id)
-  console.log(req.params.id)
+  Category.findOne()
+  // console.log(req.params.id)
     // Associated Products data
-    .then(dbProductData => res.json(dbProductData))
+    .then(dbProductData => {
+      if (!dbProductData) {
+        res.status(404)
+        return;
+      }
+      res.json(dbProductData);
+    })
     .catch(Error => {
       console.error(Error);
     });
