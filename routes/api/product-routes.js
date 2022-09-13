@@ -8,11 +8,13 @@ router.get('/', (req, res) => {
   // find all products
   Product.findAll()
   // be sure to include its associated Category and Tag data
-  .then(dbTagData, dbCategoryData => res.json(dbTagData, dbCategoryData))
-  console.log("TagData & CategoryData ->", dbTagData, dbCategoryData)
-  .catch(Error => {
-    console.error(Error);
-  });
+  .then(ProductTag => {
+    res.json(ProductTag)
+  })
+  console.log("TagData & CategoryData ->", ProductTag)
+  // .catch(Error => {
+  //   console.error(Error);
+  // });
 });
 
 // get one product
