@@ -6,10 +6,12 @@ const { Category, Product } = require('../../models');
 router.get('/', (req, res) => {
   // find all categories
   Category.findAll()
-  // console.log('category route for product data')
+    // console.log('category route for product data')
     // Associated Products data
-    .then(dbProductData => res.json(dbProductData))
-  console.log("ProductData ->", dbProductData)
+    .then(dbProductData => {
+      console.log("ProductData ->", dbProductData)
+      res.json(dbProductData)
+    })
     .catch(Error => {
       console.error(Error);
     });
