@@ -12,20 +12,39 @@ router.get('/', (req, res) => {
     res.json(ProductTag)
   })
   console.log("TagData & CategoryData ->", ProductTag)
-  // .catch(Error => {
-  //   console.error(Error);
-  // });
 });
 
 // get one product
 router.get('/:id', (req, res) => {
   // find a single product by its `id`
-
+  Product.findOne()
+  // console.log(req.params.id)
+    // Associated Products data
+    .then(ProductTag => {
+      if (!ProductTag) {
+        res.status(404)
+        return;
+      }
+      res.json(ProductTag);
+    })
   // be sure to include its associated Category and Tag data
 });
 
 // create new product
 router.post('/', (req, res) => {
+  Product.create({
+    product_name: req.body.product_name,
+    price: req.body.price,
+    stock: req.body.stock,
+    tagIds: req.body.tagIds
+  })
+  .then(ProductTag => {
+    if (!ProductTag) {
+      res.status(404)
+      return;
+    }
+    res.json(ProductTag);
+  })
   /* req.body should look like this...
     {
       product_name: "Basketball",
