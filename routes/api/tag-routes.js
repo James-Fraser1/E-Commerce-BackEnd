@@ -1,4 +1,5 @@
 const router = require('express').Router();
+// const { RESERVED } = require('mysql2/lib/constants/client');
 const { Tag, Product, ProductTag } = require('../../models');
 
 // The `/api/tags` endpoint
@@ -6,18 +7,24 @@ const { Tag, Product, ProductTag } = require('../../models');
 router.get('/', (req, res) => {
   // find all tags
   Tag.findAll()
-    // be sure to include its associated Product data
-  .then(dbTagData => {
-    res.json(dbTagData)
-  })
-  console.log("TagData ->", dbTagData)
-  .catch(Error => {
-    console.error(Error);
-  });
+  // be sure to include its associated Product data
+  console.log('TAG ROUTE')
+    .then(TagData => {
+      res.json(TagData)
+    })
+  console.log("TagData ->", TagData)
 });
 
 router.get('/:id', (req, res) => {
   // find a single tag by its `id`
+  Tag.findOne()
+  console.log('Find one tag')
+  .then(TagData => {
+    res.json(TagData)
+  })
+  .catch(Error => {
+    console.error(Error);
+  });
   // be sure to include its associated Product data
 });
 
