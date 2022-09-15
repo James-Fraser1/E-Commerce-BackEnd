@@ -42,7 +42,13 @@ router.put('/:id', (req, res) => {
       id: req.params.id
     }
   })
-  .then
+  .then(tags => {
+    if (!tags) {
+      res.status(404)
+      return;
+    }
+    res.json(tags);
+  })
 });
 
 router.delete('/:id', (req, res) => {
